@@ -18,8 +18,31 @@ print(f"\n{df_bruta.dtypes}")
 print("\nProdução Beneficiada:")
 print(f"\n{df_benef.dtypes}")
 # %%
+df_bruta
+# %%
+df_benef
+# %%
 df_bruta["Indicação Contido"] = df_bruta["Indicação Contido"].fillna("Sem informação")
 df_bruta
+
+def str_to_float(x:str):
+    x = (x.replace(" ", "")
+          .replace(",", ".")
+          .replace("\xa0","")
+        )
+    return float(x)
+
+df_bruta["Quantidade Produção - Minério ROM (t)"] = df_bruta["Quantidade Produção - Minério ROM (t)"].apply(str_to_float)
+df_bruta["Quantidade Contido"] = df_bruta["Quantidade Contido"].apply(str_to_float)
+df_bruta["Quantidade Venda (t)"] = df_bruta["Quantidade Venda (t)"].apply(str_to_float)
+df_bruta["Valor Venda (R$)"] = df_bruta["Valor Venda (R$)"].apply(str_to_float)
+df_bruta["Quantidade Transformação / Consumo / Utilização (t)"] = df_bruta["Quantidade Transformação / Consumo / Utilização (t)"].apply(str_to_float)
+df_bruta["Valor Transformação / Consumo / Utilização nesta mina (R$)"] = df_bruta["Valor Transformação / Consumo / Utilização nesta mina (R$)"].apply(str_to_float)
+df_bruta["Quantidade Transferência para Transformação / Utilização / Consumo (t)"] = df_bruta["Quantidade Transferência para Transformação / Utilização / Consumo (t)"].apply(str_to_float)
+df_bruta["Valor Transferência para Transformação / Utilização / Consumo (R$)"] = df_bruta["Valor Transferência para Transformação / Utilização / Consumo (R$)"].apply(str_to_float)
+
+
+
 # %%
 df_bruta.isnull().sum()
 # %%
