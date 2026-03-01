@@ -41,6 +41,12 @@ df_bruta["Valor Transformação / Consumo / Utilização nesta mina (R$)"] = df_
 df_bruta["Quantidade Transferência para Transformação / Utilização / Consumo (t)"] = df_bruta["Quantidade Transferência para Transformação / Utilização / Consumo (t)"].apply(str_to_float)
 df_bruta["Valor Transferência para Transformação / Utilização / Consumo (R$)"] = df_bruta["Valor Transferência para Transformação / Utilização / Consumo (R$)"].apply(str_to_float)
 
+df_benef["Quannidade Produção"] = df_benef["Quanntidade Produção"].apply(str_to_float)
+df_benef["Quantidade Contido"] = df_benef["Quantidade Contido"].apply(str_to_float)
+df_benef["Quantidade Venda"] = df_benef["Quantidade Venda"].apply(str_to_float)
+df_benef["Valor Venda (R$)"] = df_benef["Valor Venda (R$)"].apply(str_to_float)
+df_benef["Quantidade Transferência para Transformação / Utilização / Consumo"] = df_benef["Quantidade Transferência para Transformação / Utilização / Consumo"].apply(str_to_float)
+df_benef["Valor Transferência para Transformação / Utilização / Consumo (R$)"] = df_benef["Valor Transferência para Transformação / Utilização / Consumo (R$)"].apply(str_to_float)
 
 
 # %%
