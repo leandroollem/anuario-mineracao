@@ -38,6 +38,8 @@ df_bruta["Quantidade Transferência para Transformação / Utilização / Consum
 df_bruta["Valor Transferência para Transformação / Utilização / Consumo (R$)"] = df_bruta["Valor Transferência para Transformação / Utilização / Consumo (R$)"].apply(str_to_float)
 
 df_benef["Quantidade Produção"] = df_benef["Quantidade Produção"].apply(str_to_float)
+df_benef["Quantidade Consumo/Utilização na Usina"] = df_benef["Quantidade Consumo/Utilização na Usina"].apply(str_to_float)
+df_benef["Valor Consumo / Utilização na Usina (R$)"] = df_benef["Valor Consumo / Utilização na Usina (R$)"].apply(str_to_float)
 df_benef["Quantidade Contido"] = df_benef["Quantidade Contido"].apply(str_to_float)
 df_benef["Quantidade Venda"] = df_benef["Quantidade Venda"].apply(str_to_float)
 df_benef["Valor Venda (R$)"] = df_benef["Valor Venda (R$)"].apply(str_to_float)
@@ -59,6 +61,12 @@ df_benef["Indicação Contido"] = df_benef["Indicação Contido"].fillna("Sem In
 print("\n| DEPOIS DA LIMPEZA |")
 print(f"\nTotal de valores não informados na Produção Bruta: {df_bruta.isnull().sum().sum()} | Porcentagem: {round(df_bruta.isnull().mean()*100,2)}")
 print(f"Total de valores não informados na Produção Beneficiada: {df_benef.isnull().sum().sum()} | Porcentagem: {round(df_benef.isnull().mean()*100,2)}")
+# %%
+print("=== Check de Duplicatas ===")
+print(f"\n| PRODUÇÃO BRUTA |")
+print(f"Número de linhas duplicadas: {df_bruta.duplicated().sum()}")
+print(f"\n| PRODUÇÃO BENEFICIADA |")
+print(f"Número de linhas duplicadas: {df_benef.duplicated().sum()}")
 
 # %%
 print ("=== Substâncias por Unidade de Medida ===")
@@ -86,62 +94,17 @@ for unidade in unidades_de_medida:
 
 # %%
 print("=== Check de Outliers ===")
+print("\n| PRODUÇÃO BRUTA |")
 estatisticas = df_bruta["Valor Venda (R$)"].describe()
-print(estatisticas)
-
+print(f"\n{estatisticas}")
 top10 = df_bruta.nlargest(10, 'Valor Venda (R$)')[['Ano base', 'UF', 'Substância Mineral', 'Valor Venda (R$)']]
 print("\nMaiores Valores Registrados")
 print(top10)
 
-plt.figure(figsize=(10,8))
-sns.boxplot(data=df_bruta, x="Classe Substância", y="Valor Venda (R$)")
-plt.yscale('log')
-plt.title("Distribuição de Valor por Classe (Escala Logarítmica)")
-plt.xticks(rotation=45)
-plt.show()
-
-# %%
-plt.figure(figsize=(10,8))
-status_counts = df_bruta['Classe Substância'].value_counts()
-status_counts.plot(kind='bar', color='crimson', edgecolor='black', alpha=1)
-plt.title('Distribuição dos Tipos de Minérios', fontsize=14, fontweight='bold')
-plt.xlabel('Grupo das Substâncias', fontsize=12, fontweight='bold')
-plt.ylabel('Número de Substâncias', fontsize=12, fontweight='bold')
-plt.xticks(rotation=0)
-plt.grid(axis='y', alpha=0.5, color='black')
-plt.show()
-
-# %%
-plt.figure(figsize=(10,8))
-status_counts = df_bruta['Substância Mineral'].value_counts()
-status_counts.plot(kind='bar', color='purple', edgecolor='black', alpha=1)
-plt.title('Distribuição das Substâncias Minerais', fontsize=14, fontweight='bold')
-plt.xlabel('Nome das Substâncias', fontsize=12, fontweight='bold')
-plt.ylabel('Número de Substâncias', fontsize=12, fontweight='bold')
-plt.xticks(rotation=90)
-plt.grid(axis='y', alpha=0.5, color='black')
-plt.show()
-
-# %%
-plt.figure(figsize=(10,8))
-status_counts = df_benef['Classe Substância'].value_counts()
-status_counts.plot(kind='bar', color='crimson', edgecolor='black', alpha=1)
-plt.title('Distribuição dos Tipos de Minérios', fontsize=14, fontweight='bold')
-plt.xlabel('Grupo das Substâncias', fontsize=12, fontweight='bold')
-plt.ylabel('Número de Substâncias', fontsize=12, fontweight='bold')
-plt.xticks(rotation=0)
-plt.grid(axis='y', alpha=0.5, color='black')
-plt.show()
-
-# %%
-plt.figure(figsize=(10,8))
-status_counts = df_benef['Substância Mineral'].value_counts()
-status_counts.plot(kind='bar', color='purple', edgecolor='black', alpha=1)
-plt.title('Distribuição das Substâncias Minerais', fontsize=14, fontweight='bold')
-plt.xlabel('Nome das Substâncias', fontsize=12, fontweight='bold')
-plt.ylabel('Número de Substâncias', fontsize=12, fontweight='bold')
-plt.xticks(rotation=90)
-plt.grid(axis='y', alpha=0.5, color='black')
-plt.show()
-
+print("\n| PRODUÇÃO BENEFICIADA |")
+estatisticas = df_benef["Valor Venda (R$)"].describe()
+print(f"\n{estatisticas}")
+top10 = df_benef.nlargest(10, 'Valor Venda (R$)')[['Ano base', 'UF', 'Substância Mineral', 'Valor Venda (R$)']]
+print("\nMaiores Valores Registrados")
+print(top10)
 # %%
