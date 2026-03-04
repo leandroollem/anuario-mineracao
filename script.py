@@ -1,7 +1,6 @@
 # %%
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+
 df_bruta = pd.read_csv("data/Producao_Bruta.csv", encoding="latin1")
 df_benef = pd.read_csv("data/Producao_Beneficiada.csv", encoding="latin1")
 

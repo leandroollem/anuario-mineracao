@@ -30,7 +30,7 @@ df_benef["Quantidade Transferência para Transformação / Utilização / Consum
 df_benef["Valor Transferência para Transformação / Utilização / Consumo (R$)"] = df_benef["Valor Transferência para Transformação / Utilização / Consumo (R$)"].apply(str_to_float)
 # %%
 plt.figure(figsize=(10,8))
-sns.boxplot(data=df_bruta, x="Classe Substância", y="Valor Venda (R$)", color='indianred')
+sns.boxplot(data=df_bruta, x="Classe Substância", y="Valor Venda (R$)", palette='Set1')
 plt.yscale('log')
 plt.xlabel('Classe Substância', fontsize=12, fontweight='bold')
 plt.ylabel('Valor Venda (R$)', fontsize=12, fontweight='bold')
@@ -39,7 +39,7 @@ plt.xticks(rotation=0)
 plt.show()
 # %%
 plt.figure(figsize=(10,8))
-sns.boxplot(data=df_benef, x="Classe Substância", y="Valor Venda (R$)", color='gold')
+sns.boxplot(data=df_benef, x="Classe Substância", y="Valor Venda (R$)", palette='Set1')
 plt.yscale('log')
 plt.xlabel('Classe Substância', fontsize=12, fontweight='bold')
 plt.ylabel('Valor Venda (R$)', fontsize=12, fontweight='bold')
